@@ -1,0 +1,15 @@
+{
+	"name": "adf-priya-learning-01",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d3be493f-428b-4d52-8da3-f58706190e16",
+		"tenantId": "df761c7c-09e6-4505-8b63-4b581e26fa77"
+	}
+}
