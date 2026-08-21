@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://dummyjson.com/",
+			"url": "https://dummyjson.com/users",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
