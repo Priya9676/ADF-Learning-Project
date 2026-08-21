@@ -1,0 +1,64 @@
+{
+	"name": "DS_MetaTarget_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"folder": {
+				"type": "string"
+			},
+			"files": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().files",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().folder",
+					"type": "Expression"
+				},
+				"container": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "SourceSchema",
+				"type": "String"
+			},
+			{
+				"name": "SourceTable",
+				"type": "String"
+			},
+			{
+				"name": "TargetPath",
+				"type": "String"
+			},
+			{
+				"name": "LoadType",
+				"type": "String"
+			},
+			{
+				"name": "WatermarkColumn",
+				"type": "String"
+			},
+			{
+				"name": "IsActive",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
