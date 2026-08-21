@@ -1,0 +1,19 @@
+{
+	"name": "DS_api_to_json_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "users",
+				"container": "bronze"
+			}
+		},
+		"schema": {}
+	}
+}
