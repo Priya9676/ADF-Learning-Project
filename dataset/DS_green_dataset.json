@@ -1,0 +1,239 @@
+{
+	"name": "DS_green_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "firstName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "lastName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "maidenName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "age",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gender",
+				"type": "nvarchar"
+			},
+			{
+				"name": "email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "password",
+				"type": "nvarchar"
+			},
+			{
+				"name": "birthDate",
+				"type": "date"
+			},
+			{
+				"name": "image",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bloodGroup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "height",
+				"type": "decimal",
+				"precision": 6,
+				"scale": 2
+			},
+			{
+				"name": "weight",
+				"type": "decimal",
+				"precision": 6,
+				"scale": 2
+			},
+			{
+				"name": "eyeColor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hairColor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hairType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "city",
+				"type": "nvarchar"
+			},
+			{
+				"name": "state",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stateCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "postalCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "lat",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 6
+			},
+			{
+				"name": "lng",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 6
+			},
+			{
+				"name": "country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "macAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "university",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cardExpire",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cardNumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cardType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "currency",
+				"type": "nvarchar"
+			},
+			{
+				"name": "iban",
+				"type": "nvarchar"
+			},
+			{
+				"name": "department",
+				"type": "nvarchar"
+			},
+			{
+				"name": "companyName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "companyAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "companyCity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "companyState",
+				"type": "nvarchar"
+			},
+			{
+				"name": "companyStateCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "companyPostalCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "companyLat",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 6
+			},
+			{
+				"name": "companyLng",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 6
+			},
+			{
+				"name": "companyCountry",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ein",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ssn",
+				"type": "nvarchar"
+			},
+			{
+				"name": "userAgent",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cryptoCoin",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cryptoWallet",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cryptoNetwork",
+				"type": "nvarchar"
+			},
+			{
+				"name": "role",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Users_Green"
+		}
+	}
+}

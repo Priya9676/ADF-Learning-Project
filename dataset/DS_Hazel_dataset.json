@@ -1,0 +1,16 @@
+{
+	"name": "DS_Hazel_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Users_Hazel"
+		}
+	}
+}
