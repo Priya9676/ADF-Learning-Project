@@ -1,0 +1,11 @@
+{
+	"name": "pl_MetaDriven_ProcessEntity",
+	"properties": {
+		"parameters": {
+			"EntityID": {
+				"type": "int"
+			}
+		},
+		"annotations": []
+	}
+}
