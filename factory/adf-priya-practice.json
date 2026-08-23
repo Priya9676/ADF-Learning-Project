@@ -1,0 +1,15 @@
+{
+	"name": "adf-priya-practice",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a482eaa4-81c3-438b-a943-f7f1c24e2fb3",
+		"tenantId": "df761c7c-09e6-4505-8b63-4b581e26fa77"
+	}
+}

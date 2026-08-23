@@ -1,0 +1,17 @@
+{
+	"name": "MetadataLookup",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Lookup_data",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ETL_Metadata"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
