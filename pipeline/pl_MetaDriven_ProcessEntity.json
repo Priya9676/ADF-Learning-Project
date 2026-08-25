@@ -73,7 +73,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "GetFiles",
+						"activity": "Get_Watermark",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -82,7 +82,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('GetFiles').output.childItems\n",
+						"value": "@activity('GetFiles').output.childItems",
 						"type": "Expression"
 					},
 					"activities": [
@@ -267,7 +267,7 @@
 							]
 						},
 						{
-							"name": "Validate_SalesOrder",
+							"name": "ProcessSalesOrder",
 							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
@@ -286,142 +286,16 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"storedProcedureName": "[stg].[usp_ValidateSalesOrder]"
-							},
-							"linkedServiceName": {
-								"referenceName": "LS_AzureSQL",
-								"type": "LinkedServiceReference"
-							}
-						},
-						{
-							"name": "Deduplicate_SalesOrder",
-							"type": "SqlServerStoredProcedure",
-							"dependsOn": [
-								{
-									"activity": "Validate_SalesOrder",
-									"dependencyConditions": [
-										"Succeeded"
-									]
+								"storedProcedureName": "[dw].[usp_ProcessSalesOrder]",
+								"storedProcedureParameters": {
+									"WatermarkValue": {
+										"value": {
+											"value": "@activity('Get_Watermark').output.firstRow.WatermarkValue",
+											"type": "Expression"
+										},
+										"type": "DateTime"
+									}
 								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"storedProcedureName": "[stg].[usp_DeduplicateSalesOrder]"
-							},
-							"linkedServiceName": {
-								"referenceName": "LS_AzureSQL",
-								"type": "LinkedServiceReference"
-							}
-						},
-						{
-							"name": "Load_FactSales",
-							"type": "SqlServerStoredProcedure",
-							"dependsOn": [
-								{
-									"activity": "Deduplicate_SalesOrder",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"storedProcedureName": "[dw].[usp_LoadFactSales]"
-							},
-							"linkedServiceName": {
-								"referenceName": "LS_AzureSQL",
-								"type": "LinkedServiceReference"
-							}
-						},
-						{
-							"name": "Load_DimProduct",
-							"type": "SqlServerStoredProcedure",
-							"dependsOn": [
-								{
-									"activity": "Load_FactSales",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"storedProcedureName": "[dw].[usp_LoadDimProduct]"
-							},
-							"linkedServiceName": {
-								"referenceName": "LS_AzureSQL",
-								"type": "LinkedServiceReference"
-							}
-						},
-						{
-							"name": "Load_DimCustomer",
-							"type": "SqlServerStoredProcedure",
-							"dependsOn": [
-								{
-									"activity": "Load_DimProduct",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"storedProcedureName": "[dw].[usp_LoadDimCustomer]"
-							},
-							"linkedServiceName": {
-								"referenceName": "LS_AzureSQL",
-								"type": "LinkedServiceReference"
-							}
-						},
-						{
-							"name": "Load_DimStore",
-							"type": "SqlServerStoredProcedure",
-							"dependsOn": [
-								{
-									"activity": "Load_DimCustomer",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"storedProcedureName": "[dw].[usp_LoadDimStore]"
 							},
 							"linkedServiceName": {
 								"referenceName": "LS_AzureSQL",
@@ -429,6 +303,71 @@
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "Get_Watermark",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "GetFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT WatermarkValue\nFROM meta.Watermark\nWHERE EntityId = 4;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_SQL_Watermark",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Update_Watermark",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "ForEachFile",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[meta].[usp_UpdateWatermark]",
+					"storedProcedureParameters": {
+						"EntityId": {
+							"value": "4",
+							"type": "Int32"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_AzureSQL",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],

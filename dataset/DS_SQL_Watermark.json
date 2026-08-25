@@ -1,0 +1,32 @@
+{
+	"name": "DS_SQL_Watermark",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EntityId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "WatermarkValue",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "UpdatedOn",
+				"type": "datetime2",
+				"scale": 7
+			}
+		],
+		"typeProperties": {
+			"schema": "meta",
+			"table": "Watermark"
+		}
+	}
+}
